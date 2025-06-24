@@ -45,7 +45,7 @@ cd sava
 ### 2. Install dependencies
 
 ```bash
-npm install
+bun install
 ```
 
 ### 3. Set up `.env.local`
@@ -69,7 +69,7 @@ NEXTAUTH_URL=http://localhost:3000
 ### 4. Run the app
 
 ```bash
-npm run dev
+bun dev
 ```
 
 ---
