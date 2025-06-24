@@ -115,9 +115,3 @@ npm run dev
 ## 📄 License
 
 MIT — do what you like, but please respect user privacy and autonomy.
-
----
-
-## 🧠 Credits
-
-Built with ❤️ by [Matt Whalley](https://github.com/mattwhalley)
