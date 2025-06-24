@@ -2,9 +2,18 @@
 
 import { useState } from 'react';
 
+interface StructuredEntry {
+  date?: string;
+  title?: string;
+  summary?: string;
+  tags?: string[];
+  people?: string[];
+  [key: string]: unknown;
+}
+
 export default function Home() {
   const [rawText, setRawText] = useState('');
-  const [structured, setStructured] = useState(null);
+  const [structured, setStructured] = useState<StructuredEntry | null>(null);
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false); // Add upload state
 
@@ -31,7 +40,7 @@ export default function Home() {
     }
   }
 
-  const handleUploadToDrive = async (entryData: any) => {
+  const handleUploadToDrive = async (entryData: StructuredEntry) => {
     setUploading(true);
     try {
       const response = await fetch('/api/upload-to-drive', {
