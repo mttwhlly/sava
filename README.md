@@ -1,36 +1,123 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ✨ Sava — A Private AI-Powered Paper Trail App
 
-## Getting Started
+Sava is a minimal, intelligent journaling tool that helps you capture moments, events, and work-related logs in structured form — and stores them privately in your own Google Drive.
 
-First, run the development server:
+Perfect for:
+
+- Creating a defensible paper trail in chaotic work environments
+- Emotional processing and reflection
+- Personal journaling with AI-assisted structure
+
+---
+
+## 🧠 Features
+
+- ✍️ Freeform text input → Structured journal entry via GPT-4
+- 🧾 Automatically formats entries as Markdown
+- ☁️ Saves logs to a dedicated `Sava` folder in your **own Google Drive**
+- 🔐 Authenticated via Google OAuth (your data is yours)
+- 🧠 AI-generated fields: title, summary, tags, people, sentiment, etc.
+- 💾 (Planned) Offline-first mode, search, and Smart Views
+
+---
+
+## 🔧 Tech Stack
+
+| Layer      | Tech                               |
+| ---------- | ---------------------------------- |
+| Frontend   | Next.js (App Router), Tailwind CSS |
+| AI         | OpenAI GPT-4o (via API)            |
+| Auth       | next-auth + Google OAuth           |
+| Storage    | Google Drive API (user-owned)      |
+| Deployment | Vercel / Coolify (self-hosted)     |
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repo
+
+```bash
+git clone https://github.com/your-username/sava.git
+cd sava
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Set up `.env.local`
+
+```env
+# Google OAuth
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+
+# OpenAI
+OPENAI_API_KEY=your-openai-api-key
+
+# next-auth
+NEXTAUTH_SECRET=generate-with-openssl
+NEXTAUTH_URL=http://localhost:3000
+```
+
+> Make sure to enable Google Drive API in your Google Cloud Console and configure OAuth credentials with redirect URI:
+> `http://localhost:3000/api/auth/callback/google`
+
+### 4. Run the app
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📁 Folder Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+/app
+  /api
+    /auth/[...nextauth]    → Google OAuth setup
+    /structure-entry        → AI-powered structuring
+    /upload-to-drive        → Upload .md files to Google Drive
+/components                → AuthStatus, EntryForm, etc.
+/lib
+  authOptions.ts           → next-auth shared config
+  uploadToDrive.ts         → Drive API logic
+  formatEntryMarkdown.ts   → Markdown formatter
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 📦 Roadmap
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [x] GPT-4o entry structuring
+- [x] Google OAuth with per-user Drive
+- [x] Markdown file upload to "Sava" folder
+- [x] Folder ID caching in session
+- [ ] Offline storage (IndexedDB)
+- [ ] Searchable history view
+- [ ] Daily journaling reminders
+- [ ] Smart tagging and entry linking
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🛡️ Privacy & Ownership
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- All entries are stored in your **own** Google Drive
+- Sava does not store your data or access it beyond the current session
+- OAuth scopes are limited to `drive.file` — your app can only see/edit what it creates
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 📄 License
+
+MIT — do what you like, but please respect user privacy and autonomy.
+
+---
+
+## 🧠 Credits
+
+Built with ❤️ by [Matt Whalley](https://github.com/mattwhalley)
