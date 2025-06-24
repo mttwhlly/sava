@@ -7,7 +7,6 @@ export default function Home() {
   const [rawText, setRawText] = useState('');
   const [structured, setStructured] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [tanaEmail, setTanaEmail] = useState('');
 
   async function handleSubmit() {
     setLoading(true);
